@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(phim));
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.mynotifyicon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.anzeigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,17 +42,6 @@
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(634, 365);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            // 
             // mynotifyicon
             // 
             this.mynotifyicon.BalloonTipText = "phim";
@@ -61,7 +49,7 @@
             this.mynotifyicon.Icon = ((System.Drawing.Icon)(resources.GetObject("mynotifyicon.Icon")));
             this.mynotifyicon.Text = "phim";
             this.mynotifyicon.Visible = true;
-            this.mynotifyicon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mynotifyicon_MouseDoubleClick);
+            this.mynotifyicon.Click += new System.EventHandler(this.mynotifyicon_Click);
             // 
             // contextMenuStrip1
             // 
@@ -135,7 +123,6 @@
             this.ClientSize = new System.Drawing.Size(634, 365);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.webBrowser1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -152,8 +139,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        
         private System.Windows.Forms.NotifyIcon mynotifyicon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;

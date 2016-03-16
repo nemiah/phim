@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using CefSharp.WinForms;
 using CefSharp;
@@ -16,29 +15,19 @@ namespace phim
         public phim()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Minimized;
+
             this.browser = new ChromiumWebBrowser("about:blank")
             {
                 Dock = DockStyle.Fill,
             };
             toolStripContainer1.ContentPanel.Controls.Add(this.browser);
+
             this.browser.RegisterJsObject("bridge", new JSBridge(this));
             this.browser.ConsoleMessage += OnBrowserConsoleMessage;
-            //console.Add("init");
+            
             this.checkSettings();
             this.setUrl();
-            /*if (Properties.Settings.Default.server == "") {
-                Properties.Settings.Default.server = "cloud.furtmeier.it";
-                Properties.Settings.Default.Save();
-            }
-
-            System.Diagnostics.Debug.WriteLine(Properties.Settings.Default.server);*/
-            Microsoft.Win32.SystemEvents.SessionEnded += new Microsoft.Win32.SessionEndedEventHandler(OnSystemLogoff);
-        }
-
-        private void OnSystemLogoff(object sender, EventArgs e)
-        {
-            this.realExit = true;
-            Application.Exit();
         }
 
         private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs args)
@@ -52,18 +41,11 @@ namespace phim
             if (Properties.Settings.Default.server == "")
             {
                 toolStripContainer1.Hide();
-                //button1.Show();
                 showSettings();
             } else
-            {
                 toolStripContainer1.Show();
-               // button1.Hide();
-            }
+            
 
-        }
-
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
         }
 
         private void phim_Load(object sender, EventArgs e)
@@ -82,25 +64,33 @@ namespace phim
                 return;
 
             browser.Load(url);
-            
         }
 
         private void phim_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == this.WindowState)
-            {
                 this.Hide();
-            }
+            
         }
 
-        private void mynotifyicon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void mynotifyicon_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Normal;
-            this.Show();
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == System.Windows.Forms.MouseButtons.Right)
+                return;
+
+            if (FormWindowState.Minimized == this.WindowState) 
+                this.WindowState = FormWindowState.Normal;
+            else
+                this.WindowState = FormWindowState.Minimized;
         }
 
         private void phim_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+                this.realExit = true;
+            
+
             if (this.realExit)
             {
                 Properties.Settings.Default.position = this.Location;
@@ -117,7 +107,8 @@ namespace phim
             }
 
             e.Cancel = true;
-            this.Hide();
+
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
