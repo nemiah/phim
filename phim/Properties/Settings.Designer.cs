@@ -82,5 +82,23 @@ namespace phim.Properties {
                 this["position"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string authServerUrl {
+            get {
+                return ((string)(this["authServerUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("874bcoo8b4vpaq874ba8b")]
+        public string authServerToken {
+            get {
+                return ((string)(this["authServerToken"]));
+            }
+        }
     }
 }

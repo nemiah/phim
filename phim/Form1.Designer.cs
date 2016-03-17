@@ -131,6 +131,7 @@
             this.Text = "phim";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.phim_FormClosing);
             this.Load += new System.EventHandler(this.phim_Load);
+            this.Resize += new System.EventHandler(this.phim_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
