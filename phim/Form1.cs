@@ -33,6 +33,9 @@ namespace phim
 
             this.checkSettings();
             this.setUrl();
+
+            if(Properties.Settings.Default.authServerUrl != "")
+               einstellungenToolStripMenuItem.Visible = false;
         }
 
         private void OnPowerChange(object s, PowerModeChangedEventArgs e)
@@ -91,13 +94,13 @@ namespace phim
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 WebClient wc = new WebClient();
-                var xml = wc.DownloadString("https://" + Properties.Settings.Default.authServerUrl + "/ubiquitous/phim/provisioning.php?token=" + WebUtility.UrlEncode(Properties.Settings.Default.authServerToken) + "&user=" + WebUtility.UrlEncode(winName));
-
+                var xml = wc.DownloadString("https://" + Properties.Settings.Default.authServerUrl + "/ubiquitous/phim/provisioning.php?token=" + WebUtility.UrlEncode(Properties.Settings.Default.authServerToken) + (Properties.Settings.Default.authServerCloud != "" ? "&cloud=" + Properties.Settings.Default.authServerCloud : "") + "&user=" + WebUtility.UrlEncode(winName));
+               
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xml);
                 
-                ad.server = doc.DocumentElement.SelectSingleNode("/phynx/phim/server").InnerText;
-                ad.cloud = doc.DocumentElement.SelectSingleNode("/phynx/phim/cloud").InnerText;
+                ad.server = Properties.Settings.Default.authServerUrl;
+                ad.cloud = Properties.Settings.Default.authServerCloud;
                 ad.username = "";
                 ad.password = "";
                 ad.token = doc.DocumentElement.SelectSingleNode("/phynx/phim/token").InnerText;
@@ -133,7 +136,7 @@ namespace phim
             authData ad = this.getAuthData();
             
             string url = "https://" + ad.server + "/ubiquitous/phim/phim.php?cloud=" + ad.cloud + (ad.token != null ? "&token=" + ad.token : "&username=" + ad.username + "&password=" + ad.password);
-            //MessageBox.Show(url);
+            
             if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
                 return;
 
@@ -150,6 +153,7 @@ namespace phim
 
             if (FormWindowState.Minimized == this.WindowState)
             {
+                this.Show();
                 this.WindowState = FormWindowState.Normal;
                 //MessageBox.Show("Show!");
             }
@@ -196,8 +200,8 @@ namespace phim
 
         private void anzeigenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Show();
             this.WindowState = FormWindowState.Normal;
-            //this.Show();
         }
 
         private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -244,7 +248,7 @@ namespace phim
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
-                //this.Hide();
+                this.Hide();
                 //MessageBox.Show("Hidden!");
             }
 

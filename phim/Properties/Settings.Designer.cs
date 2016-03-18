@@ -85,7 +85,7 @@ namespace phim.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string authServerUrl {
             get {
                 return ((string)(this["authServerUrl"]));
@@ -94,10 +94,19 @@ namespace phim.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("874bcoo8b4vpaq874ba8b")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string authServerToken {
             get {
                 return ((string)(this["authServerToken"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string authServerCloud {
+            get {
+                return ((string)(this["authServerCloud"]));
             }
         }
     }

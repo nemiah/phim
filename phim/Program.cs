@@ -19,9 +19,9 @@ namespace phim
             //settings.PackLoadingDisabled = true;
             //settings.CefCommandLineArgs.Add("disable-gpu-vsync", "1");
             settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            settings.IgnoreCertificateErrors = true;
 
             Cef.Initialize(settings);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new phim());

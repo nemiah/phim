@@ -18,10 +18,13 @@
       <Value Profile="(Default)">20, 20</Value>
     </Setting>
     <Setting Name="authServerUrl" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">localhost</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="authServerToken" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">874bcoo8b4vpaq874ba8b</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="authServerCloud" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
